@@ -4,21 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NYAN CAT</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <span class="logo-text">NYAN</span>
-            </div>
-            <div class="nav-links">
-                <a href="#about">About</a>
-                <a href="#links">Links</a>
-                <a href="#memes">Memes</a>
-            </div>
-        </div>
-    </nav>
+    <!-- Floating Nyan Cats in background -->
+    <div id="floating-nyans"></div>
 
     <section class="hero">
         <div class="hero-content">
@@ -44,32 +37,49 @@
 
     <section id="links" class="section dark">
         <div class="container">
-            <h2 class="section-title">Join the Community</h2>
+            <h2 class="section-title">Links</h2>
             <div class="links-grid">
                 <a href="https://dexscreener.com/solana/EaRqg8VQP8xrJx9HpKk46rbWPK3b55UyQKzWU9b4rdK2" class="link-card" id="dex-link">
-                    <div class="link-icon">💱</div>
+                    <div class="link-icon">
+                        <img src="images/dexs.png" alt="Dexscreener">
+                    </div>
                     <h3>Dexscreener</h3>
-                    <p>Trade NYAN</p>
+                    <p>Track the charts</p>
                 </a>
                 <a href="https://pump.fun/coin/9BVn3Y8tPghbnGuuuxoj2mGekqgSQV1M7nALF7brpump" class="link-card" id="pumpfun-link">
-                    <div class="link-icon">🚀</div>
+                    <div class="link-icon">
+                        <img src="images/pump.png" alt="Pump.fun">
+                    </div>
                     <h3>PUMP.FUN</h3>
-                    <p>Launch Platform</p>
+                    <p>Buy on pump.fun</p>
                 </a>
                 <a href="https://x.com/PRguitarman" class="link-card" id="chris-twitter">
-                    <div class="link-icon">👨‍💻</div>
-                    <h3>Creator</h3>
-                    <p>Chris Twitter</p>
+                    <div class="link-icon">
+                        <img src="images/x.png" alt="X/Twitter">
+                    </div>
+                    <h3>Chris (Creator)</h3>
+                    <p>Follow @PRguitarman</p>
                 </a>
                 <a href="https://x.com/i/communities/1993879804202864716" class="link-card" id="x-community">
-                    <div class="link-icon">👥</div>
+                    <div class="link-icon">
+                        <img src="images/x.png" alt="X Community">
+                    </div>
                     <h3>Community</h3>
-                    <p>X/Twitter</p>
+                    <p>Join the Nyan Community</p>
                 </a>
                 <a href="https://linktr.ee/NyanCat" class="link-card" id="chris-linktree">
-                    <div class="link-icon">🌐</div>
-                    <h3>Linktree</h3>
-                    <p>All Chris Links</p>
+                    <div class="link-icon">
+                        <img src="images/linktree.png" alt="Linktree">
+                    </div>
+                    <h3>Chris Linktree</h3>
+                    <p>Chris official links</p>
+                </a>
+                <a href="https://solscan.io/tx/2DXmPdFysmnQTTPyHp6RAEbvMArfrzQj42EeGZ5oKxoadjX8jvHH6NWv2fUmWjavXEnokwfm4qG6GvqQochW7aDs" class="link-card" id="burn-link">
+                    <div class="link-icon">
+                        <img src="images/burn.png" alt="Burn Proof">
+                    </div>
+                    <h3>10% Burned</h3>
+                    <p>Proof of Burn</p>
                 </a>
             </div>
         </div>
@@ -86,12 +96,11 @@
 
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2025 Nyan Cat Memecoin. All memes reserved.</p>
+            <p>&copy; 2024 Nyan Cat Memecoin. All memes reserved.</p>
             <p>This is a community token. Not financial advice.</p>
         </div>
     </footer>
 
     <script src="script.js"></script>
 </body>
-
 </html>
