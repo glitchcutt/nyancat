@@ -12,15 +12,58 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Navbar background on scroll
+// Navbar hide on scroll
+let lastScrollY = window.scrollY;
+const navbar = document.querySelector('.navbar');
+
 window.addEventListener('scroll', function() {
-    const navbar = document.querySelector('.navbar');
-    if (window.scrollY > 100) {
-        navbar.style.backgroundColor = 'rgba(10, 10, 15, 0.98)';
+    // Hide navbar on scroll down
+    if (window.scrollY > lastScrollY && window.scrollY > 100) {
+        navbar.classList.add('hidden');
     } else {
-        navbar.style.backgroundColor = 'rgba(10, 10, 15, 0.95)';
+        navbar.classList.remove('hidden');
     }
+    lastScrollY = window.scrollY;
 });
+
+// Create floating Nyan Cats - SIMPLE CODE THAT WORKS
+function createFloatingNyans() {
+    const container = document.getElementById('floating-nyans');
+    const numberOfNyans = 8;
+    
+    container.innerHTML = '';
+
+    // Pre-defined and well spaced heights
+    const heights = [5, 20, 30, 40, 50, 60, 70, 80];
+    
+    for (let i = 0; i < numberOfNyans; i++) {
+        const nyan = document.createElement('img');
+        nyan.src = 'images/nyan.gif';
+        nyan.className = 'floating-nyan';
+        nyan.alt = 'Floating Nyan Cat';
+        
+        // EACH WITH FIXED AND SPACED HEIGHT
+        const startPositionY = heights[i];
+        
+        // RANDOM SPEEDS BUT NOT TOO DIFFERENT
+        const duration = Math.random() * 40 + 20; // 20-60 seconds
+        
+        // RANDOM DELAYS SO THEY DON'T ALL APPEAR TOGETHER
+        const delay = Math.random() * 0; // 0 seconds delay
+        
+        const size = Math.random() * 20 + 80;
+        
+        nyan.style.cssText = `
+            top: ${startPositionY}%;
+            left: -150px;
+            height: ${size}px;
+            animation: floatNyanStraight ${duration}s linear ${delay}s infinite;
+            opacity: 0.5;
+        `;
+        
+        container.appendChild(nyan);
+    }
+}
 
 // Add subtle animation to link cards on scroll
 const observerOptions = {
@@ -32,47 +75,18 @@ const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
+            entry.target.style.transform = 'translateY(0) scale(1)';
         }
     });
 }, observerOptions);
 
-// Observe link cards
-document.querySelectorAll('.link-card').forEach(card => {
-    card.style.opacity = '0';
-    card.style.transform = 'translateY(20px)';
-    card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-    observer.observe(card);
+// Observe link cards and memes
+document.querySelectorAll('.link-card, .meme-card, .about-text p, .footer p').forEach(element => {
+    element.style.opacity = '0';
+    element.style.transform = 'translateY(20px) scale(0.95)';
+    element.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(element);
 });
-
-// Create stars in background
-function createStars() {
-    const starsContainer = document.createElement('div');
-    starsContainer.className = 'stars';
-    
-    document.body.appendChild(starsContainer);
-    
-    for (let i = 0; i < 200; i++) {
-        const star = document.createElement('div');
-        star.className = 'star';
-        
-        const size = Math.random() * 3;
-        const duration = Math.random() * 10 + 5;
-        const delay = Math.random() * 5;
-        
-        star.style.cssText = `
-            width: ${size}px;
-            height: ${size}px;
-            top: ${Math.random() * 100}%;
-            left: ${Math.random() * 100}%;
-            opacity: ${Math.random() * 0.7 + 0.1};
-            animation-duration: ${duration}s;
-            animation-delay: ${delay}s;
-        `;
-        
-        starsContainer.appendChild(star);
-    }
-}
 
 // Create meme gallery
 function createMemeGallery() {
@@ -91,27 +105,14 @@ function createMemeGallery() {
         
         memeCard.appendChild(memeImg);
         memesGrid.appendChild(memeCard);
+        
+        // Add observer for animation
+        memeCard.style.opacity = '0';
+        memeCard.style.transform = 'translateY(20px) scale(0.95)';
+        memeCard.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        observer.observe(memeCard);
     }
 }
-
-// Add twinkle animation to CSS
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes twinkle {
-        0%, 100% { opacity: 0.2; }
-        50% { opacity: 1; }
-    }
-`;
-document.head.appendChild(style);
-
-// Parallax effect on stars
-window.addEventListener('scroll', function() {
-    const scrolled = window.pageYOffset;
-    const stars = document.querySelector('.stars');
-    if (stars) {
-        stars.style.transform = `translateY(${scrolled * 0.3}px)`;
-    }
-});
 
 // Typewriter effect on subtitle
 function typeWriter(element, text, speed = 50) {
@@ -131,35 +132,40 @@ function typeWriter(element, text, speed = 50) {
 
 // Initialize everything when page loads
 document.addEventListener('DOMContentLoaded', function() {
-    createStars();
+    createFloatingNyans();
     createMemeGallery();
     
     const subtitle = document.querySelector('.hero-subtitle');
     if (subtitle) {
         const originalText = subtitle.textContent;
-        typeWriter(subtitle, originalText, 30);
-    }
-    
-    // Add mouse move effect to Nyan Cat
-    const nyanCat = document.querySelector('.nyan-cat');
-    if (nyanCat) {
-        document.addEventListener('mousemove', function(e) {
-            const moveX = (e.clientX - window.innerWidth / 2) * 0.01;
-            const moveY = (e.clientY - window.innerHeight / 2) * 0.01;
-            nyanCat.style.transform = `translate(${moveX}px, ${moveY}px) rotate(${moveX * 0.1}deg)`;
-        });
+        typeWriter(subtitle, originalText, 40);
     }
 });
 
 // Console welcome message
-console.log('%c🚀 NYAN CAT MEMECOIN - TO THE MOON! 🌈', 'color: #8b5cf6; font-size: 16px; font-weight: bold;');
-console.log('%cJoin the legendary meme revolution!', 'color: #06b6d4; font-size: 14px;');
+console.log('%c🎮 NYAN CAT RETRO EDITION - PRESS START! 🌈', 'color: #8b5cf6; font-size: 16px; font-weight: bold;');
+console.log('%cJoin the legendary pixelated meme revolution!', 'color: #06b6d4; font-size: 14px;');
 
-// Resize effect to adjust stars
+// Resize effect to adjust floating nyans
 window.addEventListener('resize', function() {
-    const stars = document.querySelector('.stars');
-    if (stars) {
-        stars.innerHTML = '';
-        createStars();
-    }
+    createFloatingNyans();
 });
+
+// Preload images for better performance
+function preloadImages() {
+    const imageUrls = [
+        'images/nyan.gif',
+        'images/galaxy.png'
+    ];
+    
+    for (let i = 1; i <= 20; i++) {
+        imageUrls.push(`images/memes/${i}.jpg`);
+    }
+    
+    imageUrls.forEach(url => {
+        const img = new Image();
+        img.src = url;
+    });
+}
+
+document.addEventListener('DOMContentLoaded', preloadImages);
